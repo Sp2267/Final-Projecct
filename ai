@@ -1,0 +1,24 @@
+from transformers import pipeline
+
+def summarize_text(text):
+    # Load the summarization pipeline
+    summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+    
+    # Generate the summary
+    summary = summarizer(text, max_length=150, min_length=30, do_sample=False)
+    
+    # Extract and return the summarized text
+    return summary[0]['summary_text']
+
+# Example usage
+text = """
+    Artificial intelligence (AI) has rapidly become one of the most transformative technologies of the 21st century. 
+    It is reshaping industries, enhancing productivity, and offering unprecedented insights through big data analysis. 
+    AI technologies like machine learning, natural language processing, and robotics are widely used in fields 
+    such as healthcare, finance, and manufacturing. However, the development of AI also raises ethical questions 
+    about privacy, security, and job displacement. As AI continues to evolve, society must address these challenges 
+    to ensure that AI benefits humanity as a whole.
+"""
+
+# Print the summary
+print("Summary:", summarize_text(text))
